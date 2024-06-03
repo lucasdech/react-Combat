@@ -1,0 +1,22 @@
+/* .card-title {
+    color: white !important;
+} */
+
+#caroussel {
+
+    position: absolute;
+    top: 15em;
+    width: 50em;
+    color: black !important;
+}
+
+#caroussel img {
+
+    height: 350px;
+    margin-bottom: 10em;
+}
+
+#player {
+
+    background-color: rgba(0, 0, 0, 0.5);
+}

@@ -1,20 +1,31 @@
 import React from 'react';
 import './Game.css';
-import Monster from './Monster';
+import MonsterList from './MonsterList';
 import PlayerList from './PlayerList';
+import { useSelector } from 'react-redux';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <Monster />
-        <br></br>
-        <section className="container-fluid">
+
+const Game = () => {
+
+  const turn = useSelector(state => state.fight.isTurnArray);
+
+  return (
+    <>
+    <div id='logo'>
+      <div id='compteur'>Tour numéro : {turn.turn}</div>
+      <img src='/logo.png'/>
+    </div>
+      <div className="App d-flex">
+        <section className="container-fluid m-5">
           <PlayerList />
         </section >
+        <section className='mx-5'>
+          <MonsterList />
+        </section>
+        <br></br>
       </div>
-    )
-  }
+    </>
+  )
 }
 
-export default App;
+export default Game;

@@ -1,36 +1,31 @@
 import React from 'react';
 import ButtonCapacity from './ButtonCapacity';
 import ProgressBar from './ProgressBar';
+import './playerCard.css'
+import Button from 'react-bootstrap/Button';
+import Carousel from 'react-bootstrap/Carousel';
 
+const PlayerCard = (props) => {
 
-
-class PlayerCard extends React.Component {
-   
-
-    render() {
-        return (
-            <div key={this.props.player.id} className="col-sm-3 card center" id={`joueur${this.props.player.id}`}>
-
-                <div className="card-body text-center">
-                    <h5 className="card-title">{this.props.player.name}</h5>
-                    <ProgressBar pv={this.props.player.pv} pvMax={this.props.player.pvMax} faType='fa-heart' barName=' : pv ' bgType='bg-danger' />
-                    <ProgressBar pv={this.props.player.mana} pvMax={this.props.player.manaMax} faType='fa-fire-alt' barName=' : mana ' />
-
-                    <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
-                    <div className="row ">
+    return (
+        <>
+            <div className='d-flex justify-content-center'>
+                <img src={props.player.photo} alt='player' className='p-5' />
+            </div>
+            <Carousel.Caption>
+                <h3>{props.player.name}</h3>
+                <div>
+                    <ProgressBar pv={props.player.pv} pvMax={props.player.pvmax} faType='fa-heart' barName=' : pv ' bgType='bg-danger' />
+                    <ProgressBar pv={props.player.mana} pvMax={props.player.manamax} faType='fa-blue' barName=' : fluide ' bgType='bg-primary' />
+                    <div className="row">
                         <div >
-                            <ButtonCapacity player={this.props.player} />
-                            <ButtonCapacity player={this.props.player} />
-                            <ButtonCapacity player={this.props.player} />
-                            <ButtonCapacity player={this.props.player} />
-
+                            <ButtonCapacity id={props.player.id} player={props.player} />
                         </div>
-                    </div >
-                </div >
-
-            </div >
-        )
-    }
+                    </div>
+                </div>
+            </Carousel.Caption>
+        </>
+    )
 }
 
 

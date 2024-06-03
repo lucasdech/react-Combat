@@ -1,0 +1,17 @@
+/* .btnModal {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+} */
+
+.hidden {
+    display: none;
+}
+
+.monstre1 {
+
+    height: 100px;
+    width: 100px;
+    background-color: red;
+}
