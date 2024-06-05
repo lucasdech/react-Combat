@@ -12,6 +12,7 @@ const initialState = {
       "mana": 0,
       "manamax": 5,
       "photo": "/luffy.png",
+      "photo2": "/luffy2.png",
       "isturn": true,
     },
     {
@@ -23,6 +24,7 @@ const initialState = {
       "mana": 0,
       "manamax": 5,
       "photo": "/Zoro.png",
+      "photo2": "/Zoro2.png",
       "isturn": true,
     },
     {
@@ -34,6 +36,7 @@ const initialState = {
       "mana": 0,
       "manamax": 5,
       "photo": "/sanji.png",
+      "photo2": "/sanji2.png",
       "isturn": true,
     },
   ],
@@ -46,11 +49,13 @@ const initialState = {
     "attack": 1000,
     "rage": 10,
     "ragemax": 10,
-    "photo": "/fantome.png"
+    "photo": "/fantome.png",
+    "photo2": "/fantome.png",
   },
-  isTurnArray: {
+  turnInfo: {
     "played": [],
-    "turn": 0
+    "turnNumber": 1,
+    "death": [],
   },
 };
 
@@ -60,7 +65,6 @@ export const fightSlice = createSlice({
   reducers: {
 
     ChooseMonster: (state, action) => {
-      console.log(action.payload.monster.id)
       let newState = {
         ...state, monster: {
           ...state.monster,
@@ -71,16 +75,16 @@ export const fightSlice = createSlice({
           attack: action.payload.monster.attack,
           rage: action.payload.monster.rage,
           ragemax: action.payload.monster.ragemax,
-          photo: action.payload.monster.photo
+          photo: action.payload.monster.photo,
+          photo2: action.payload.monster.photo2
         }
       }
-
       return newState
     },
 
     hitMonster: (state, action) => {
 
-      let newState = { ...state, monster: { ...state.monster, pv: (state.monster.pv) - (action.payload.dammage), rage: state.monster.rage + 1} }
+      let newState = { ...state, monster: { ...state.monster, pv: (state.monster.pv) - (action.payload.dammage), rage: state.monster.rage + 1 } }
       if ((newState.monster.pv) <= 0) {
         newState = initialState
       }
@@ -91,30 +95,18 @@ export const fightSlice = createSlice({
       const player = state.players.find(
         (player) => player.id === action.payload.playerID
       );
-      if (player) {
-        player.mana += action.payload.mana;
-        if (player.mana > player.manamax) {
-          player.mana = 5
-        }
-      }
+      player.mana += action.payload.mana;
     },
 
     hitBack: (state, action) => {
       const player = state.players.find(
         (player) => player.id === action.payload.playerID
       );
-      if (player) {
-        player.pv -= action.payload.riposte;
-        if (player.pv < 0) {
-          player.pv = 0;
-        }
-      }
+      player.pv -= action.payload.riposte;
     },
 
     SuperAttack: (state, action) => {
-      console.log(action.payload)
-      let newState = { ...state, monster: { ...state.monster, pv: (state.monster.pv) - (action.payload.super) } }
-      console.log(newState)
+      let newState = { ...state, monster: { ...state.monster, pv: (state.monster.pv) - (action.payload.super), rage: state.monster.rage + 3 } }
       if ((newState.monster.pv) <= 0) {
         newState = initialState
       }
@@ -125,25 +117,52 @@ export const fightSlice = createSlice({
       const player = state.players.find(
         (player) => player.id === action.payload.playerID
       );
-      if (player) {
-        player.mana = 0
-      }
+      player.mana = 0
     },
 
     health: (state, action) => {
       const player = state.players.find(
         (player) => player.id === action.payload.playerID
       );
-      if (player) {
-        player.pv += action.payload.soins;
-        if (player.pv >= player.pvmax) {
-          player.pv = player.pvmax;
-        }
-      }
+      player.pv += action.payload.soins;
     },
+
+    MonsterRage: (state, action) => {
+      const player = state.players.find(
+        (player) => player.id === action.payload.playerID
+      );
+      player.pv -= action.payload.maxDegat;
+    },
+
+    TurnPlayers: (state, action) => {
+
+      const player = state.players.find(
+        (player) => player.id === action.payload.playerID
+      );
+
+      let newState = {
+        ...state,
+        turnInfo: {
+          ...state.turnInfo,
+          played: [...state.turnInfo.played, player.id]
+        }
+      };
+      return newState
+    },
+
+    EmptyTurn: (state) => {
+      let newState = { ...state, turnInfo: { ...state.turnInfo, played: []} }
+      return newState
+    },
+    
+    TurnCount: (state) => {
+        let newState = { ...state, turnInfo: { ...state.turnInfo, turnNumber: state.turnInfo.turnNumber + 1} }
+      return newState
+    },
+ 
   },
 })
 
-export const { hitMonster, hitBack, ChooseMonster, health, getMana, SuperAttack, ResetMana } = fightSlice.actions
+export const { hitMonster, hitBack, ChooseMonster, health, getMana, SuperAttack, ResetMana, MonsterRage, TurnPlayers, EmptyTurn, TurnCount } = fightSlice.actions
 
 export default fightSlice.reducer;

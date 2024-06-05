@@ -7,12 +7,12 @@ import { useSelector } from 'react-redux';
 
 const Game = () => {
 
-  const turn = useSelector(state => state.fight.isTurnArray);
-
+  const turn = useSelector(state => state.fight.turnInfo);
+  console.log(turn)
   return (
     <>
     <div id='logo'>
-      <div id='compteur'>Tour numéro : {turn.turn}</div>
+      <div id='compteur'>Tour numéro : {turn.turnNumber}</div>
       <img src='/logo.png'/>
     </div>
       <div className="App d-flex">

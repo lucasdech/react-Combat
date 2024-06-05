@@ -34,8 +34,10 @@ const LandingPage = () => {
             "pvmax": 800,
             "attack": 10,
             "rage": 0,
-            "ragemax": 5,
-            "photo": "./kaido.png"
+            "ragemax": 15,
+            "photo": "./kaido.png",
+            "photo2": "./kaido2.png"
+
         };
 
         const monster2 = {
@@ -45,8 +47,9 @@ const LandingPage = () => {
             "pvmax": 900,
             "attack": 5,
             "rage": 0,
-            "ragemax": 5,
-            "photo": "./bigMom.png"
+            "ragemax": 10,
+            "photo": "./bigMom.png",
+            "photo2": "./bigMom2.png"
         };
 
         // Fonction pour choisir un monstre
@@ -61,27 +64,33 @@ const LandingPage = () => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Body className="d-flex flex-column justify-content-center">
+                <Modal.Body className="d-flex flex-column justify-content-center" id="modalBody" > 
                     <div className="d-flex justify-content-center">
-                        <h4>Choisissez Votre Adversaire</h4>
+                        <h4 className="text-white fs-1">Choisissez Votre Adversaire</h4>
                     </div>
                     <div className="d-flex justify-content-center">
-                        <Button 
-                          variant="light" 
-                          onClick={() => { 
-                            props.onHide(); 
-                            Choose(monster1); 
-                          }}>
-                            <img src={monster1.photo} alt="photo mechant" />
-                        </Button>
-                        <Button 
-                          variant="light" 
-                          onClick={() => { 
-                            props.onHide(); 
-                            Choose(monster2); 
-                          }}>
-                            <img src={monster2.photo} alt="photo mechant" />
-                        </Button>
+                        <div id="monster1">
+                            <Button className="monstre1"
+                                variant="light"
+                                onClick={() => {
+                                    props.onHide();
+                                    Choose(monster1);
+                                }}>
+                                <img src={monster1.photo} alt="photo mechant" />
+                                <h2 className="name1">{monster1.name}</h2>
+                            </Button>
+                        </div>
+                        <div id="monster2">
+                            <Button className="monstre2"
+                                variant="light"
+                                onClick={() => {
+                                    props.onHide();
+                                    Choose(monster2);
+                                }}>
+                                <img src={monster2.photo} alt="photo mechant" />
+                                <h2 className="name2">{monster2.name}</h2>
+                            </Button>
+                        </div>
                     </div>
                 </Modal.Body>
             </Modal>

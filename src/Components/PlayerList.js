@@ -7,6 +7,7 @@ import "./playerCard.css"
 const PlayerList = () => {
 
   const players = useSelector(state => state.fight.players);
+  const Turn = useSelector(state => state.fight.turnInfo);
 
   return (
     <div className='row'>
@@ -14,7 +15,7 @@ const PlayerList = () => {
         {
           players.map((player, key) => (
             <Carousel.Item id='player'>
-              <PlayerCard key={key} player={player} />
+              <PlayerCard key={key} player={player} turn={Turn}/>
             </Carousel.Item>
           ))
         }
