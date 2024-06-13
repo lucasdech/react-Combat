@@ -32,7 +32,7 @@ const LandingPage = () => {
             "name": "Kaido",
             "pv": 800,
             "pvmax": 800,
-            "attack": 10,
+            "attack": 15,
             "rage": 0,
             "ragemax": 15,
             "photo": "./kaido.png",
