@@ -721,3 +721,59 @@ h3 {
 .carousel-wrapper .flickity-slider {
   overflow: visible;
 }
+
+.ecranFin {
+
+  height: 100vh;
+  width:100%;
+  background-image: url(../data/endPlayer.gif);
+  background-repeat: no-repeat;
+  position: absolute;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.test {
+ display: none;
+}
+
+#btnCloseModal {
+  position: absolute;
+  top: 70%;
+  left: 43%;
+}
+
+.button {
+  display: block;
+  z-index: 5;
+}
+
+
+
+.victory {
+  display: block;
+  position: relative;
+  top: 2em;
+  left: 25em;
+  height: 20em;
+  width: 70em;
+  background-image: url(../data/victory.gif);
+  z-index: 5;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.defeat {
+  display: block;
+  position: relative;
+  top: 2em;
+  left: 30em;
+  height: 20em;
+  width: 50em;
+  background-image: url(../data/defeat.gif);
+  z-index: 5;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

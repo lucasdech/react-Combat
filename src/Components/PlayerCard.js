@@ -1,5 +1,6 @@
-import React from 'react';
-import { useRef } from 'react';
+import { React, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { deathPlayer, EmptydeathPlayer } from '../features/fight/fightSlice';
 import ButtonCapacity from './ButtonCapacity';
 import ProgressBar from './ProgressBar';
 import './playerCard.css';
@@ -7,19 +8,37 @@ import Carousel from 'react-bootstrap/Carousel';
 
 const PlayerCard = (props) => {
 
-    console.log(props.player.id)
-    console.log(props.turn.played)
-
     const HavePlayed = useRef();
     const divToInner = HavePlayed.current;
+    const dispatch = useDispatch()
+
+    const player = useSelector(state =>
+        state.fight.players.find(player => player.id === props.player.id)
+    );
+
+    const deathplayer = useSelector(state => state.fight.turnInfo.death)
+
+    if (deathplayer.length == 3) {
+        dispatch(EmptydeathPlayer())
+    }
+    useEffect(() => {
+        if (props.player.pv <= 0) {
+            dispatch(deathPlayer({ playerID: props.player.id }))
+        }
+    }, [player.pv]);
 
 
     if (divToInner != undefined) {
+
         if ((props.turn.played).includes(props.player.id) == true) {
-            console.log(divToInner.classList);
             divToInner.classList.add("havePlayed")
         } else if ((props.turn.played).includes(props.player.id) == false) {
-            setTimeout(() => {divToInner.classList.remove("havePlayed")}, 1500)
+            setTimeout(() => { divToInner.classList.remove("havePlayed") }, 1500)
+        }
+
+        if (props.player.pv <= 0 ) {
+            divToInner.classList.remove("havePlayed")
+            divToInner.classList.add(`${props.player.name}dead`)
         }
     }
 
@@ -30,7 +49,6 @@ const PlayerCard = (props) => {
             return `${props.player.photo2}`;
         }
     };
-
 
     return (
         <>

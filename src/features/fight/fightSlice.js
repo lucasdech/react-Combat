@@ -13,7 +13,8 @@ const initialState = {
       "manamax": 5,
       "photo": "/luffy.png",
       "photo2": "/luffy2.png",
-      "isturn": true,
+      "dead": "/luffydead.p,g",
+
     },
     {
       "id": 2,
@@ -25,7 +26,7 @@ const initialState = {
       "manamax": 5,
       "photo": "/Zoro.png",
       "photo2": "/Zoro2.png",
-      "isturn": true,
+      "dead": "/zorodead.png",
     },
     {
       "id": 3,
@@ -37,7 +38,7 @@ const initialState = {
       "manamax": 5,
       "photo": "/sanji.png",
       "photo2": "/sanji2.png",
-      "isturn": true,
+      "dead": "/sanjidead.png",
     },
   ],
   monster:
@@ -151,18 +152,39 @@ export const fightSlice = createSlice({
     },
 
     EmptyTurn: (state) => {
-      let newState = { ...state, turnInfo: { ...state.turnInfo, played: []} }
+      let newState = { ...state, turnInfo: { ...state.turnInfo, played: [] } }
       return newState
     },
-    
-    TurnCount: (state) => {
-        let newState = { ...state, turnInfo: { ...state.turnInfo, turnNumber: state.turnInfo.turnNumber + 1} }
+
+    // TurnCount: (state) => {
+    //   let newState = { ...state, turnInfo: { ...state.turnInfo, turnNumber: state.turnInfo.turnNumber + 1 } }
+    //   return newState
+    // },
+
+    deathPlayer: (state, action) => {
+
+      const player = state.players.find(
+        (player) => player.id === action.payload.playerID
+      );
+
+      let newState = {
+        ...state,
+        turnInfo: {
+          ...state.turnInfo,
+          death: [...state.turnInfo.death, player.id]
+        }
+      };
+      console.log("le joueur est mort")
       return newState
     },
- 
+
+    EmptydeathPlayer: (state) => {
+      let newState = { ...state, turnInfo: { ...state.turnInfo, death: [] } }
+      return newState
+    }
   },
 })
 
-export const { hitMonster, hitBack, ChooseMonster, health, getMana, SuperAttack, ResetMana, MonsterRage, TurnPlayers, EmptyTurn, TurnCount } = fightSlice.actions
+export const { hitMonster, hitBack, ChooseMonster, health, getMana, SuperAttack, ResetMana, MonsterRage, TurnPlayers, EmptyTurn, TurnCount, deathPlayer, EmptydeathPlayer } = fightSlice.actions
 
 export default fightSlice.reducer;

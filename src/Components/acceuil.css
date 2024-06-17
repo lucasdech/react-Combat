@@ -44,6 +44,7 @@
     top: 9.3em;
     left: 4em;
     background-color: transparent;
+    border: none !important;
 }
 
 .monstre1:hover {
@@ -54,9 +55,10 @@
     height: 13.9em;
     width: 19em;
     position: relative;
-    top: 9.3em;
+    top: 8.7em;
     left: 4em;
     background-color: transparent;
+    border: none !important;
 }
 
 .monstre2:hover {
@@ -65,13 +67,13 @@
 
 .name1 {
     position: absolute;
-    top: 9em;
+    top: 9.5em;
     left: 2.7em;
 }
 
 .name2 {
     position: absolute;
-    top: 8.9em;
+    top: 9.6em;
     left: 2.9em;
 }
 

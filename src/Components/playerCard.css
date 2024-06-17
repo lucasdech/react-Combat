@@ -24,3 +24,30 @@
 .havePlayed {
     background-image: url(../data/played.png);
 }
+
+.Luffydead {
+    background-image: url(../data/luffydead.png);
+    z-index: 5;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    filter: invert(50); 
+}
+
+.Zorodead {
+    background-image: url(../data/zorodead.png);
+    z-index: 5;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    filter: invert(50);
+}
+
+.Sanjidead {
+    background-image: url(../data/sanjidead.png);
+    z-index: 5;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    filter: invert(50);    
+}
